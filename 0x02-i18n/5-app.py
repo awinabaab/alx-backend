@@ -2,7 +2,6 @@
 """Basic flask-babel setup"""
 
 from flask import Flask, render_template, request, g
-from flask.typing import ResponseReturnValue
 from flask_babel import Babel, gettext
 from typing import Union, Dict
 
@@ -57,7 +56,7 @@ def get_locale() -> str:
 
 
 @app.route("/", strict_slashes=False)
-def index() -> ResponseReturnValue:
+def index() -> str:
     """Renders and returns 5-index.html"""
     return render_template("5-index.html")
 

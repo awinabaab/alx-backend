@@ -2,7 +2,6 @@
 """Basic flask-babel setup"""
 
 from flask import Flask, render_template, request, g
-from flask.typing import ResponseReturnValue
 from flask_babel import Babel, gettext, format_datetime
 from typing import Union, Dict
 from datetime import datetime
@@ -33,7 +32,7 @@ users = {
 
 
 @app.context_processor
-def inject_formatter():
+def inject_formatter() -> Dict:
     """Make format_datetime available to the template context"""
     return dict(format_datetime=format_datetime)
 
@@ -66,7 +65,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-def validate_timezone(timezone: str = None):
+def validate_timezone(timezone: str = None) -> Dict:
     """Determines if timezone in a valid IANA timezone"""
     try:
         return pytz.timezone(timezone).zone
@@ -75,7 +74,7 @@ def validate_timezone(timezone: str = None):
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """Determines if the provided timezone is valid"""
     timezone = request.args.get("timezone")
 
@@ -86,7 +85,7 @@ def get_timezone():
 
 
 @app.route("/", strict_slashes=False)
-def index() -> ResponseReturnValue:
+def index() -> str:
     """Renders and returns index.html"""
     return render_template("index.html", current_time=datetime.utcnow())
 

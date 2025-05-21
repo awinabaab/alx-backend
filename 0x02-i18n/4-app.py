@@ -2,7 +2,6 @@
 """Basic flask-babel setup"""
 
 from flask import Flask, render_template, request
-from flask.typing import ResponseReturnValue
 from flask_babel import Babel, gettext
 from typing import Union
 
@@ -32,7 +31,7 @@ def get_locale() -> Union[str, None]:
 
 
 @app.route("/", strict_slashes=False)
-def index() -> ResponseReturnValue:
+def index() -> str:
     """Renders and returns 4-index.html"""
     return render_template("4-index.html")
 

@@ -2,7 +2,6 @@
 """Basic flask-babel setup"""
 
 from flask import Flask, render_template
-from flask.typing import ResponseReturnValue
 from flask_babel import Babel
 
 
@@ -22,7 +21,7 @@ babel = Babel(app)
 
 
 @app.route("/", strict_slashes=False)
-def index() -> ResponseReturnValue:
+def index() -> str:
     """Renders and returns 1-index.html"""
     return render_template("1-index.html")
 
